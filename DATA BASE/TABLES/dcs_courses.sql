@@ -9,6 +9,7 @@ create table dcs_courses(
     description_degree  varchar(255) not null,                    -- descripcion del curso
     degree_start_date   date         not null,                     -- fecha de inicio
     degree_end_date     date         not null,                     -- fecha de fin de curso
+    type_system_score   int          not null,
     degree_status       varchar(1)   not null, 
 
     -- Columnas de control 
@@ -22,5 +23,8 @@ create table dcs_courses(
     check(degree_status in('E', 'D')),
 
     -- Foreigns key - hace referencia al grado al que pertence el curso
-    foreign key (id_degree) references dcs_degree(id)
+    foreign key (id_degree) references dcs_degree(id),
+
+    -- Foreigns key - hace referencia al grado al que pertence el curso
+    foreign key (type_system_score) references dcs_sis_scoreh(cabid)
 )

@@ -1,16 +1,11 @@
 import tkinter as tk
 from tkinter import ttk, PhotoImage
 
-<<<<<<< HEAD
 # Crear ventana principal
 root = tk.Tk()
 root.title("Login DCSystem - Versión 1.0.0")
 root.geometry("960x540")
 root.resizable(False, False)
-=======
-root = Tk()
-root.title("Login DCSystem - Versión 1.0.0")
->>>>>>> 5f2b95c8817b1c92b8f25e4a1afed52579f7de40
 
 # Dividir en dos secciones
 left_frame = tk.Frame(root, width=480, height=540, bg='white')

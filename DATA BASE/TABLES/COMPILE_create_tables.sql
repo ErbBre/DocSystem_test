@@ -217,4 +217,37 @@ create table dcs_courses(
 
     -- Foreigns key - hace referencia al grado al que pertence el curso
     foreign key (id_degree) references dcs_degree(id)
+);
+
+-- =========================================
+-- R15-Concepto de notas por curso
+-- =========================================
+CREATE TABLE dcs_type_score (
+    id serial primary key,
+    score_name      varchar(20)   not null,
+    score_desc      varchar(255)  not null,
+    score_fecini    timestamp     not null,
+    score_fecfin    timestamp     not null,
+
+    -- Columnas de control
+    us_creation_date timestamp      default current_timestamp,
+    us_creation_user varchar(15)    default 'user.test',
+    us_update_date   timestamp      default current_timestamp,
+    us_update_user   varchar(15)    default 'user.test'
+);
+
+create table dcs_score(
+    id                  serial          primary     key,  -- id autoincrementable
+    id_type_concept     int             not null,         -- id_type_concept - llave foranea de la tabla dcs_type_score (de esta
+    number_score        decimal(3,2)    not null,         -- valor decimal de la nota asignada, se valida con el sistema de calificaciones asignado al curso para comprobar que este dentro de algun rango establecido en alguna linea)
+
+    -- Columnas de control 
+
+    us_creation_date    timestamp       default     current_timestamp,
+    us_creation_user    varchar(15)     default     'user.test',
+    us_update_date      timestamp       default     current_timestamp,
+    us_update_user      varchar(15)     default     'user.test',
+
+    -- Foreign keys
+    foreign key (id_type_concept) references dcs_type_score(id) 
 )

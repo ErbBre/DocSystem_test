@@ -4,6 +4,7 @@
 
 CREATE TABLE dcs_key_access_log (
     id               serial primary key,
+    id_user          int                not null,
     us_user          varchar(15)        not null,
     us_passw         varchar(20)        not null,
     us_state         char(1)            not null,
@@ -18,6 +19,6 @@ CREATE TABLE dcs_key_access_log (
     check(us_state in ('E','D') ),
 
     -- Foreigns key - hace al usuario que
-    foreign key (id) references dcs_user_access_system(id)
+    foreign key (id_user) references dcs_user_access_system(id)
 
 );

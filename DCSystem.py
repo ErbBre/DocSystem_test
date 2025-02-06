@@ -1,55 +1,21 @@
-import tkinter as tk
-from tkinter import ttk, PhotoImage
+from tkinter import *
 
-# Crear ventana principal
-root = tk.Tk()
-root.title("Login DCSystem - Versión 1.0.0")
-root.geometry("960x540")
-root.resizable(False, False)
+root = Tk()
+root.geometry("940x560")
 
-# Dividir en dos secciones
-left_frame = tk.Frame(root, width=480, height=540, bg='white')
-left_frame.pack(side=tk.LEFT, fill=tk.BOTH)
+# Crear un Frame
+FR = Frame(root)
+FR.pack(fill=BOTH, expand=True)
 
-right_frame = tk.Frame(root, width=480, height=540, bg='gray')
-right_frame.pack(side=tk.RIGHT, fill=tk.BOTH)
+# Cargar la imagen
+img = PhotoImage(file="test/DocSystem_test/SOURCE/portadaPNG.png")
 
-# Agregar título
-title_label = tk.Label(left_frame, text="DCSYSTEM", font=("Arial", 30, "bold"), bg='white')
-title_label.pack(pady=20)
+# Crear un Label con la imagen
+label = Label(FR, image=img)
+label.pack()
 
-# Icono debajo del título (60x60 px)
-icon_photo = PhotoImage(file="icon.png")
-icon_label = tk.Label(left_frame, image=icon_photo, bg='white')
-icon_label.pack()
+# Mantener la referencia a la imagen
+label.image = img
 
-# Labels y entradas
-user_label = tk.Label(left_frame, text="Usuario", font=("Arial", 12, "bold"), bg='white')
-user_label.pack(pady=5)
-user_entry = ttk.Entry(left_frame)
-user_entry.pack()
-
-pass_label = tk.Label(left_frame, text="Contraseña", font=("Arial", 12, "bold"), bg='white')
-pass_label.pack(pady=5)
-password_entry = ttk.Entry(left_frame, show='*')
-password_entry.pack()
-
-def toggle_password(event):
-    if password_entry.cget('show') == '*':
-        password_entry.config(show='')
-    else:
-        password_entry.config(show='*')
-
-password_entry.bind("<Button-3>", toggle_password)
-
-# Botón de inicio de sesión
-login_button = ttk.Button(left_frame, text="Iniciar sesión", style='TButton')
-login_button.pack(pady=20)
-
-# Cargar imagen de portada en el lado derecho
-cover_photo = PhotoImage(file="cover.png")
-cover_label = tk.Label(right_frame, image=cover_photo, bg='gray')
-cover_label.pack()
-
-# Ejecutar la aplicación
+# Iniciar el bucle principal
 root.mainloop()

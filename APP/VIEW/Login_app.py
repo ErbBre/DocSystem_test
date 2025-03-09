@@ -13,24 +13,24 @@ class Login_app:
         FR2 = Frame(root, width=480, height=540, bg="lightgray")
         FR2.pack(fill="both", side=RIGHT)
 
-        imagen = PhotoImage(file="SOURCE/portadaPNG.png")
-        imagen = imagen.subsample(1)
-        label_imagen = Label(FR2, image=imagen, bg="white", border=0)
+        self.imagen = PhotoImage(file="SOURCE/portadaPNG.png")
+        self.imagen = self.imagen.subsample(1)
+        label_imagen = Label(FR2, image=self.imagen, bg="white", border=0)
         label_imagen.pack(expand=True)
 
         # ====================================================================
         # FRAME 1 (Formulario de Login)
         # ====================================================================
-        FR1 = Frame(root, width=480, height=540, bg="green")
+        FR1 = Frame(root, width=480, height=540)
         FR1.pack(fill="both", expand=True, side=LEFT)
 
         Label(FR1, text="DCSYSTEM", font=("Arial", 30, "bold"), bg="white").pack(pady=20)
         # ====================================================================
         # Icono debajo del nombre
         # ====================================================================
-        icono = PhotoImage(file="SOURCE/portadaPNG.png")
-        icono = icono.subsample(8)  # Redimensionar a 60x60 px
-        Label(FR1, image = icono, bg = "white").pack(pady=5)
+        self.icono = PhotoImage(file="SOURCE/portadaPNG.png")
+        self.icono = self.icono.subsample(8)  # Redimensionar a 60x60 px
+        Label(FR1, image = self.icono, bg = "white").pack(pady=5)
 
         # ====================================================================
         # Usuario

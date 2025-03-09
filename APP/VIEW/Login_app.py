@@ -64,9 +64,6 @@ class Login_app:
         # ====================================================================
         BTN_LOGIN = Button(FR1, text="Iniciar Sesión", font=("Arial", 12, "bold"))
         BTN_LOGIN.pack(pady=20)
-
-root = Tk()
-
-App = Login_app(root)
-
-root.mainloop()
+    def test_function(self):
+        """Hola my dog"""
+        pass

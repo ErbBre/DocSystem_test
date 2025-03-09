@@ -7,10 +7,16 @@ root.title("DCS System Dashboard")
 #root.resizable(False, False)
 def traduction(data,type):
     if type == "month":
-        months = {"January":"Enero", "February":"Febrero", "March":"Marzo", "April":"Abril", "May":"Mayo", "June":"Junio", "July":"Julio", "Agust":"Agosto", "September":"Septiembre", "November":"Noviembre", "December":"Diciembre"}
+        months = {"January":"Enero", "February":"Febrero", "March":"Marzo", 
+                  "April":"Abril", "May":"Mayo", "June":"Junio", "July":"Julio", 
+                  "Agust":"Agosto", "September":"Septiembre", "November":"Noviembre", 
+                  "December":"Diciembre"}
         return months[data]
+    
     elif type == "day":
-        days = {"Monday":"Lunes", "Tuesday":"Martes", "Wednesday":"Miercoles", "Thursday":"Jueves", "Friday":"Viernes", "Saturday":"Sabado", "Sunday":"Domingo"}
+        days = {"Monday":"Lunes", "Tuesday":"Martes", 
+                "Wednesday":"Miercoles", "Thursday":"Jueves", 
+                "Friday":"Viernes", "Saturday":"Sabado", "Sunday":"Domingo"}
         return days[data]
 
 

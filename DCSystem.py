@@ -10,12 +10,6 @@
       - Importar y configurar los módulos del sistema.
       - Crear instancias del Controlador y ejecutar la aplicación.
       - Manejar posibles errores globales.
-
-  Uso:
-      Ejecutar el script desde la terminal o un entorno de desarrollo:
-      
-          python main.py
-
   Dependencias:
       - dcs_model.py (Manejo de datos)
       - window_main.py (Interfaz de usuario)

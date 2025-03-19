@@ -67,7 +67,7 @@ class VistaPrincipal:
         topframe = Frame(main_frame)
         topframe.pack(fill="x", side = "top")
 
-        Label(topframe, text="DCS System Dashboard", font=("Arial", 14, "bold"), bg="white").pack(pady=10,side="left")
+        Label(topframe, text="DCS System Dashboard", font=("Arial", 20, "bold"), bg="white").pack(pady=10,side="left")
         f_reloj = Frame(topframe)
         f_reloj.pack(side="right")
 

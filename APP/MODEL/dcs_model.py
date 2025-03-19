@@ -43,5 +43,5 @@ class ModeloDB:
         """Verifica si el usuario existe en la base de datos(Supabase)."""
         print(usuario,contrasena)
         
-        return False
+        return True
     

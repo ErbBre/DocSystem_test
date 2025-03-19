@@ -21,6 +21,7 @@
 =====================================================
 """
 from tkinter import *
+from APP.VIEW.components.DataEntry import DataEntry,DataEntryPass
 
 class Login_app:
     def __init__(self,root,controlador):
@@ -33,7 +34,7 @@ class Login_app:
         # ====================================================================
         # FRAME 2 (Imagen de Portada)
         # ====================================================================
-        FR2 = Frame(self.root, width=480, height=540, bg="lightgray")
+        FR2 = Frame(self.root, width=480, height=540, bg="white")
         FR2.pack(fill="both", side=RIGHT)
 
         self.imagen = PhotoImage(file="SOURCE/portadaPNG.png")
@@ -44,7 +45,7 @@ class Login_app:
         # ====================================================================
         # FRAME 1 (Formulario de Login)
         # ====================================================================
-        FR1 = Frame(self.root, width=480, height=540)
+        FR1 = Frame(self.root, width=480, height=540, bg="white")
         FR1.pack(fill="both", expand=True, side=LEFT)
 
         Label(FR1, text="DCSYSTEM", font=("Arial", 30, "bold"), bg="white").pack(pady=20)
@@ -56,32 +57,10 @@ class Login_app:
         Label(FR1, image = self.icono, bg = "white").pack(pady=5)
 
         # ====================================================================
-        # Usuario
+        # Usuario y Contraseña
         # ====================================================================
-        Label(FR1, text = "Usuario", font = ("Arial", 12, "bold"), bg = "white").pack(pady=5)
-        self.EN_USER = Entry(FR1, font = ("Arial", 12))
-        self.EN_USER.pack(pady=5)
-
-        # ====================================================================
-        # Contraseña con botón de mostrar/ocultar
-        # ====================================================================
-        Label(FR1, text = "Contraseña", font = ("Arial", 12, "bold"), bg = "white").pack(pady=5)
-
-        def toggle_password():
-            if self.EN_PASS["show"] == "*":
-                self.EN_PASS.config(show="")
-            else:
-                self.EN_PASS.config(show="*")
-
-        frame_pass = Frame(FR1, bg = "white")
-        frame_pass.pack(pady = 5)
-
-        self.EN_PASS = Entry(frame_pass, font = ("Arial", 12), show = "*")
-        self.EN_PASS.pack(side = LEFT)
-
-        BTN_TOGGLE = Button(frame_pass, text= "BTN", command = toggle_password)
-        BTN_TOGGLE.pack(side=LEFT, padx=5)
-
+        self.EN_USER = DataEntry(FR1,"Usuario")
+        self.EN_PASS = DataEntryPass(FR1,"Contraseña")
         # ====================================================================
         # Botón de inicio de sesión
         # ====================================================================
@@ -89,8 +68,8 @@ class Login_app:
         self.BTN_LOGIN.pack(pady=20)
     def user_login(self):
         """Funcion que envia datos ingresados por el usuario al controlador"""
-        usuario = self.EN_USER.get()
-        contrasena = self.EN_PASS.get()
-        
-        #Ejecuta metodo del controlador para iniciar sesion
-        self.controlador.iniciar_sesion(self.root,usuario, contrasena)
+        usuario = self.EN_USER.get_data()
+        contrasena = self.EN_PASS.get_data()
+        if usuario and contrasena:
+          #Ejecuta metodo del controlador para iniciar sesion
+          self.controlador.iniciar_sesion(self.root,usuario, contrasena)

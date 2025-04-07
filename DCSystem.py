@@ -7,6 +7,7 @@
       siguiendo el patrón Modelo-Vista-Controlador (MVC).
 
   Funcionalidades principales:
+  
       - Importar y configurar los módulos del sistema.
       - Crear instancias del Controlador y ejecutar la aplicación.
       - Manejar posibles errores globales.

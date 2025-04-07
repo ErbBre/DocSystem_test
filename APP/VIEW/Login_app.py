@@ -60,6 +60,7 @@ class Login_app:
         # Usuario y Contraseña
         # ====================================================================
         self.EN_USER = DataEntry(FR1,"Usuario")
+        self.EN_USER.init_focus_entry()
         self.EN_PASS = DataEntryPass(FR1,"Contraseña")
         # ====================================================================
         # Botón de inicio de sesión

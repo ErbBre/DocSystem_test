@@ -24,27 +24,22 @@
 =====================================================
 """
 from tkinter import *
-from datetime import datetime
-
+from functools import partial
+from APP.VIEW.tab.tab_inicio     import tab_inicio
+from APP.VIEW.tab.tab_teacher    import tab_teacher
+from APP.VIEW.tab.tab_curso      import tab_curso
+from APP.VIEW.tab.tab_report     import tab_report
+from APP.VIEW.tab.tab_student    import tab_student
+from APP.VIEW.tab.tab_calendario import tab_calendario
+from APP.VIEW.tab.tab_finance    import tab_finance
+from APP.VIEW.tab.tab_almacen    import tab_almacen
+from APP.VIEW.tab.tab_perfil     import tab_perfil
+from APP.VIEW.tab.tab_config     import tab_config
 class VistaPrincipal:
     def __init__(self, root):
         self.root = root
         self.root.title("DCS System Dashboard")
-        def traduction(data,type):
-            if type == "month":
-                months = {"January":"Enero", "February":"Febrero", "March":"Marzo", 
-                        "April":"Abril", "May":"Mayo", "June":"Junio", "July":"Julio", 
-                        "Agust":"Agosto", "September":"Septiembre", "November":"Noviembre", 
-                        "December":"Diciembre"}
-                return months[data]
-            
-            elif type == "day":
-                days = {"Monday":"Lunes", "Tuesday":"Martes", 
-                        "Wednesday":"Miercoles", "Thursday":"Jueves", 
-                        "Friday":"Viernes", "Saturday":"Sabado", "Sunday":"Domingo"}
-                return days[data]
-
-
+        
         sidebar = Frame(self.root, bg="black")
         sidebar.pack(side="left", fill="y")
 
@@ -55,50 +50,55 @@ class VistaPrincipal:
         f_btn.pack(expand=True)
 
         menu_items = ["Inicio", "Maestros", "Cursos", "Reportes", "Alumnos", "Calendario", "Finanzas", "Almacén", "Perfil", "Configuración"]
+        
+        self.botones = []  # Lista para guardar los botones
+        
         for item in menu_items:
-            Button(f_btn, text=item,font= ("Arial", 12, "bold"), fg="white", bg="black", relief="flat", anchor="center", width=15).pack(fill="x", padx=10, pady=2)
+            btn = Button(
+                f_btn,
+                text=item,
+                font=("Arial", 12, "bold"),
+                fg="white",
+                bg="black",
+                relief="flat",
+                anchor="center",
+                width=15
+            )
+            btn.config(command=partial(self.navigator_tab, btn))
+            btn.pack(fill="x", padx=10, pady=2)
+            self.botones.append(btn)
 
         Button(sidebar, text="Cerrar sesión", font = ("Arial", 12, "bold"), fg="white", bg="red", relief="flat").pack(fill="x",side="bottom")
 
 
-        main_frame = Frame(self.root, bg="white")
+        main_frame = Frame(self.root)
         main_frame.pack(side="right", fill="both", expand=True)
 
-        topframe = Frame(main_frame)
-        topframe.pack(fill="x", side = "top")
+        self.tab_items = {"Inicio":       tab_inicio(main_frame), 
+                          "Maestros":     tab_teacher(main_frame), 
+                          "Cursos":       tab_curso(main_frame), 
+                          "Reportes":     tab_report(main_frame), 
+                          "Alumnos":      tab_student(main_frame), 
+                          "Calendario":   tab_calendario(main_frame), 
+                          "Finanzas":     tab_finance(main_frame), 
+                          "Almacén":      tab_almacen(main_frame), 
+                          "Perfil":       tab_perfil(main_frame), 
+                          "Configuración":tab_config(main_frame)
+        }
+        
+        # self.tab_items["Inicio"].view_on()
+        # teacher = tab_teacher(main_frame)
+        # self.navigator_tab("Inicio")
 
-        Label(topframe, text="DCS System Dashboard", font=("Arial", 20, "bold"), bg="white").pack(pady=10,side="left")
-        f_reloj = Frame(topframe)
-        f_reloj.pack(side="right")
-
-        clock_label = Label(f_reloj,font=("Arial", 20, "bold"), bg="white")
-        clock_label.pack(side="top")
-        date_label = Label(f_reloj, font=("Arial", 12), bg="white")
-        date_label.pack(side="bottom")
-
-        def update_clock():
-            day_today = traduction(datetime.now().strftime("%A"),"day")
-            month_today = traduction(datetime.now().strftime("%B"),"month")
-            clock_label.config(text=datetime.now().strftime("%I:%M:%S %p"))
-            date_label.config(text=datetime.now().strftime(f"{day_today} %d de {month_today} del %Y"))
-            self.root.after(1000, update_clock)
-
-        update_clock()
-
-
-        metrics_frame = Frame(main_frame, bg="white")
-        metrics_frame.pack(pady=20)
-
-        metricas = [
-            ("Alumnos inscritos", 156),
-            ("Promedio general", 17),
-            ("Maestros activos", 60),
-            ("Estudiantes en AE", 14)
-        ]
-
-        for text, value in metricas:
-            frame = Frame(metrics_frame, relief="solid", borderwidth=1, padx=10, pady=5)
-            frame.pack(side="left", padx=10)
+    def navigator_tab(self,btn_press):
+        # print(btn_press['text'])
+        self.tab_items[btn_press['text']].view_on()
+        for clave, valor in self.tab_items.items():
+            if clave != btn_press['text']:
+                valor.view_off()
+                print(clave, "OFF")
+            # else:
+            #     valor.view_on()
+            #     print(clave, "ON")
             
-            Label(frame, text=value, font=("Helvetica", 45, "bold")).pack()
-            Label(frame, text=text, font=("Arial", 20, "bold")).pack()
+            # print(f"Clave: {clave} - Valor: {valor}")   

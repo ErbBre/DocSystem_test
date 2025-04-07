@@ -66,7 +66,10 @@ class DataEntry():
             self.__IN_DATA.config(highlightthickness=1)  # Mostrar borde rojo si está vacío
         else:
             return self.__IN_DATA.get()
-    
+    def init_focus_entry(self):
+        """Active focus in Entry"""
+        self.__IN_DATA.focus_set()
+
     @property
     def in_data(self):
         """Getter para obtener __IN_DATA"""

@@ -62,7 +62,7 @@ class tab_inicio:
     
     def view_on(self):
         """Enabled visibility of the tab"""
-        self.__main_tab_frame.pack()
+        self.__main_tab_frame.pack(expand=True,fill=BOTH)
 
     def view_off(self):
          """Disabled visibility of the tab"""

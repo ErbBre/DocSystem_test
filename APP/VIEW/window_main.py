@@ -54,19 +54,26 @@ class VistaPrincipal:
         self.botones = []  # Lista para guardar los botones
         
         for item in menu_items:
+            if item == "Inicio":
+                bg = "white"; fg = "black"
+            else:
+                bg = "black"; fg = "white"
             btn = Button(
                 f_btn,
                 text=item,
                 font=("Arial", 12, "bold"),
-                fg="white",
-                bg="black",
+                fg=fg,
+                bg=bg,
                 relief="flat",
                 anchor="center",
-                width=15
+                width=15,
+                cursor="hand2"
             )
             btn.config(command=partial(self.navigator_tab, btn))
             btn.pack(fill="x", padx=10, pady=2)
             self.botones.append(btn)
+            btn.bind("<Enter>", self.on_enter)
+            btn.bind("<Leave>", self.on_leave)
 
         Button(sidebar, text="Cerrar sesión", font = ("Arial", 12, "bold"), fg="white", bg="red", relief="flat").pack(fill="x",side="bottom")
 
@@ -91,14 +98,30 @@ class VistaPrincipal:
         # self.navigator_tab("Inicio")
 
     def navigator_tab(self,btn_press):
-        # print(btn_press['text'])
-        self.tab_items[btn_press['text']].view_on()
+        """This function is responsible for the visibility and selection of the tabs."""
+        
+        #Return to initial settings with background and foreground for default
+        for i in self.botones[:]:
+            if i.cget("text") != btn_press.cget("text"):
+                i.config(bg="black",fg="white")
+        #Set bg and fg to button selected
+        btn_press.config(bg="white",fg="black")
+
+        # Disable all tabs where the button text is different from the selected one
         for clave, valor in self.tab_items.items():
             if clave != btn_press['text']:
                 valor.view_off()
                 print(clave, "OFF")
-            # else:
-            #     valor.view_on()
-            #     print(clave, "ON")
-            
-            # print(f"Clave: {clave} - Valor: {valor}")   
+
+        # Activated tab for button selected        
+        self.tab_items[btn_press['text']].view_on()
+        
+    def on_enter(self,e):
+        if e.widget.cget("fg") != "black" and e.widget.cget("bg") != "white":
+            e.widget.config(bg="gray", fg="white")
+
+    def on_leave(self,e):
+        # print("CONFIGURACION WIDGET :",e.widget.configure(),e.widget.cget("bg"),e.widget.cget("fg"))
+        
+        if e.widget.cget("fg") != "black" and e.widget.cget("bg") != "white":
+            e.widget.config(bg="black", fg="white")
